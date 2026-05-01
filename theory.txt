@@ -1,0 +1,29 @@
+
+
+new mysqli('hostname', 'username', 'password', 'databasename');
+
+hostname: localhost
+username: root
+password: 
+databasename:  school_management_system_20
+
+
+READ=>
+
+SELECT * FROM students;
+
+mysqli_query(connection, query)
+
+initialize
+
+while(condition){
+    //statement
+    //increment
+}
+
+
+$row = { id: 1, name: 'Sahin', roll: 1}
+$row = { id: 1, name: 'Sahin', roll: 1}
+
+
+INSERT INTO students () VALUES()
