@@ -27,3 +27,9 @@ $row = { id: 1, name: 'Sahin', roll: 1}
 
 
 INSERT INTO students () VALUES()
+
+SELECT * FROM students WHERE id=3;
+
+UPDATE students SET name='Rohim', roll= 1, class='Six', address='Dhaka', phone='+88017XXXXXXXX', email='example@gmail.com', blood='AB+' WHERE id=3;
+
+DELETE FROM students WHERE id=5;

@@ -87,8 +87,8 @@ include("config.php");
                     <td>'.$email.'</td>
                     <td>'.$bloodGroup.'</td>
                     <td>
-                        <a href="#" class="btn btn-info">Edit</a>
-                        <a href="#" class="btn btn-danger">Delete</a>
+                        <a href="edit.php?id='.$id.'" class="btn btn-info">Edit</a>
+                        <a href="delete.php?id='.$id.'" class="btn btn-danger">Delete</a>
                     </td>
                 </tr>';
                 $serialNumber++;
