@@ -4,27 +4,26 @@ include("config.php");
 
 <?php
 
-if(isset($_POST["submit"])){
+if (isset($_POST["submit"])) {
 
-$name = $_POST["name"];
-$roll = $_POST["roll"];
-$class = $_POST["class"];
-$address = $_POST["address"];
-$phone = $_POST["phone"];
-$email = $_POST["email"];
-$bloodGroup = $_POST["blood"];
+    $name = $_POST["name"];
+    $roll = $_POST["roll"];
+    $class = $_POST["class"];
+    $address = $_POST["address"];
+    $phone = $_POST["phone"];
+    $email = $_POST["email"];
+    $bloodGroup = $_POST["blood"];
 
 
 
-$query = "INSERT INTO students (name, roll, class, address, phone, email, blood) VALUES('$name', '$roll', '$class', '$address', '$phone', '$email', '$bloodGroup')";
-$insertData = mysqli_query($connections, $query);//true-false
+    $query = "INSERT INTO students (name, roll, class, address, phone, email, blood) VALUES('$name', '$roll', '$class', '$address', '$phone', '$email', '$bloodGroup')";
+    $insertData = mysqli_query($connections, $query);//true-false
 
-if($insertData){
-    header("location:index.php");
-}
-else{
-    echo "Failed to Insert Data";
-}
+    if ($insertData) {
+        header("location:index.php");
+    } else {
+        echo "Failed to Insert Data";
+    }
 
 }
 
@@ -69,57 +68,71 @@ else{
             </div>
         </div>
     </nav>
-
-    <div class="container">
-        <form action="" method="post">
-            <div class="mb-3">
-                <label for="name" class="form-label">Student Name:</label>
-                <input type="text" class="form-control" id="name" name="name" value="" required>
+    <div class="container py-5">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-header bg-dark text-white rounded-top-2">
+                <h3 class="mb-0">Add New Student</h3>
             </div>
+            <div class="card-body p-4">
 
-             <div class="mb-3">
-                <label for="roll" class="form-label">Student Roll:</label>
-                <input type="number" class="form-control" id="roll" name="roll" required>
+                <form action="" method="post">
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Student Name</label>
+                            <input type="text" class="form-control" name="name" required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Student Roll</label>
+                            <input type="number" class="form-control" name="roll" required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Student Class</label>
+                            <input type="text" class="form-control" name="class" required>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Student Address</label>
+                            <textarea class="form-control" name="address" rows="3" required></textarea>
+                        </div>
+
+
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Student Phone</label>
+                            <input type="tel" class="form-control" name="phone" required>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Student Email</label>
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
+
+
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Blood Group</label>
+                            <select name="blood" class="form-select" required>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="text-end mt-4">
+                        <button type="submit" name="submit" class="btn btn-primary px-4 rounded-3">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+
             </div>
-
-            <div class="mb-3">
-                <label for="class" class="form-label">Student Class:</label>
-                <input type="text" class="form-control" id="class" name="class" required>
-            </div>
-
-             <div class="mb-3">
-                <label for="address" class="form-label">Student Address:</label>
-                <textarea class="form-control" id="address" name="address" required></textarea>
-            </div>
-
-            <div class="mb-3">
-                <label for="phone" class="form-label">Student Phone:</label>
-                <input type="tel" class="form-control" id="phone" name="phone" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="email" class="form-label">Student Email:</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="blood" class="form-label">Student Blood Group:</label>
-                <select name="blood" id="blood" class="form-control" required>
-                    <option value="A+">A+</option>
-                    <option value="A-">A-</option>
-                    <option value="B+">B+</option>
-                    <option value="B-">B-</option>
-                    <option value="AB+">AB+</option>
-                    <option value="AB-">AB-</option>
-                    <option value="O+">O+</option>
-                    <option value="O-">O-</option>
-                </select>
-            </div>
-
-            
-
-            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-        </form>
+        </div>
     </div>
 
 

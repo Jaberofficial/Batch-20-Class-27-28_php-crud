@@ -21,17 +21,15 @@ if (isset($_GET["id"])) {
     $email = $realData["email"];
     $bloodGroup = $realData["blood"];
 
-}
-
-else{
-    $id = '' ;
-    $name = '' ;
-    $roll = '' ;
-    $class = '' ;
-    $address = '' ;
-    $phone = '' ;
-    $email = '' ;
-    $bloodGroup = '' ;
+} else {
+    $id = '';
+    $name = '';
+    $roll = '';
+    $class = '';
+    $address = '';
+    $phone = '';
+    $email = '';
+    $bloodGroup = '';
 }
 
 
@@ -47,7 +45,7 @@ if (isset($_POST["submit"])) {
 
 
 
-    $query = "UPDATE students SET name='$name', roll= $roll, class='$class', address='$$address', phone='$phone', email='$email', blood='$bloodGroup' WHERE id=$singleId";
+    $query = "UPDATE students SET name='$name', roll= $roll, class='$class', address='$address', phone='$phone', email='$email', blood='$bloodGroup' WHERE id=$singleId";
 
     $updateData = mysqli_query($connections, $query);//true-false
 
@@ -100,57 +98,88 @@ if (isset($_POST["submit"])) {
             </div>
         </div>
     </nav>
-
-    <div class="container">
-        <form action="" method="post">
-            <div class="mb-3">
-                <label for="name" class="form-label">Student Name:</label>
-                <input type="text" class="form-control" id="name" name="name" value="<?php echo $name ?>" required>
+    <div class="container py-5">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-header bg-dark text-white rounded-top-2">
+                <h3 class="mb-0">Edit Student</h3>
             </div>
+            <div class="card-body p-4">
 
-            <div class="mb-3">
-                <label for="roll" class="form-label">Student Roll:</label>
-                <input type="number" class="form-control" id="roll" name="roll" value="<?php echo $roll ?>" required>
+                <form action="" method="post">
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Student Name</label>
+                            <input type="text" class="form-control" name="name" value="<?php echo $name ?>" required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Student Roll</label>
+                            <input type="number" class="form-control" name="roll" value="<?php echo $roll ?>" required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Student Class</label>
+                            <input type="text" class="form-control" name="class" value="<?php echo $class ?>" required>
+                        </div>
+
+
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label">Student Address</label>
+                            <textarea class="form-control" name="address" rows="3"
+                                required><?php echo $address ?></textarea>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Student Phone</label>
+                            <input type="tel" class="form-control" name="phone" value="<?php echo $phone ?>" required>
+                        </div>
+
+
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Student Email</label>
+                            <input type="email" class="form-control" name="email" value="<?php echo $email ?>" required>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Blood Group</label>
+                            <select name="blood" class="form-select" required>
+                                <option value="A+" <?php if ($bloodGroup == 'A+') {
+                                    echo 'selected';
+                                } ?>>A+</option>
+                                <option value="A-" <?php if ($bloodGroup == 'A-') {
+                                    echo 'selected';
+                                } ?>>A-</option>
+                                <option value="B+" <?php if ($bloodGroup == 'B+') {
+                                    echo 'selected';
+                                } ?>>B+</option>
+                                <option value="B-" <?php if ($bloodGroup == 'B-') {
+                                    echo 'selected';
+                                } ?>>B-</option>
+                                <option value="AB+" <?php if ($bloodGroup == 'AB+') {
+                                    echo 'selected';
+                                } ?>>AB+</option>
+                                <option value="AB-" <?php if ($bloodGroup == 'AB-') {
+                                    echo 'selected';
+                                } ?>>AB-</option>
+                                <option value="O+" <?php if ($bloodGroup == 'O+') {
+                                    echo 'selected';
+                                } ?>>O+</option>
+                                <option value="O-" <?php if ($bloodGroup == 'O-') {
+                                    echo 'selected';
+                                } ?>>O-</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="text-end mt-4">
+                        <button type="submit" name="submit" class="btn btn-primary px-4 rounded-3">
+                            Update
+                        </button>
+                    </div>
+                </form>
+
             </div>
-
-            <div class="mb-3">
-                <label for="class" class="form-label">Student Class:</label>
-                <input type="text" class="form-control" id="class" name="class" value="<?php echo $class ?>" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="address" class="form-label">Student Address:</label>
-                <textarea class="form-control" id="address" name="address" required><?php echo $address ?></textarea>
-            </div>
-
-            <div class="mb-3">
-                <label for="phone" class="form-label">Student Phone:</label>
-                <input type="tel" class="form-control" id="phone" name="phone" value="<?php echo $phone ?>" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="email" class="form-label">Student Email:</label>
-                <input type="email" class="form-control" id="email" name="email" value="<?php echo $email ?>" required>
-            </div>
-
-            <div class="mb-3">
-                <label for="blood" class="form-label">Student Blood Group:</label>
-                <select name="blood" id="blood" class="form-control" required>
-                    <option value="A+"<?php if($bloodGroup =='A+'){echo'selected';} ?>>A+</option>
-                    <option value="A-" <?php if($bloodGroup =='A-'){echo'selected';} ?>>A-</option>
-                    <option value="B+" <?php if($bloodGroup =='B+'){echo'selected';} ?>>B+</option>
-                    <option value="B-" <?php if($bloodGroup =='B-'){echo'selected';} ?>>B-</option>
-                    <option value="AB+" <?php if($bloodGroup =='AB+'){echo'selected';} ?>>AB+</option>
-                    <option value="AB-" <?php if($bloodGroup =='AB-'){echo'selected';} ?>>AB-</option>
-                    <option value="O+" <?php if($bloodGroup =='O+'){echo'selected';} ?>>O+</option>
-                    <option value="O-" <?php if($bloodGroup =='O-'){echo'selected';} ?>>O-</option>
-                </select>
-            </div>
-
-
-
-            <button type="submit" name="submit" class="btn btn-primary">Update</button>
-        </form>
+        </div>
     </div>
 
 

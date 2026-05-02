@@ -9,8 +9,7 @@ include("config.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Management System</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -42,73 +41,103 @@ include("config.php");
         </div>
     </nav>
 
-
     <div class="container mt-5">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Roll</th>
-                    <th scope="col">Class</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Blood Group</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $query = "SELECT * FROM students";
-                $students = mysqli_query($connections, $query);
-                $serialNumber = 1;
+        <div class="table-responsive rounded-2 overflow-hidden shadow-lg">
+            <table class="table table-bordered table-hover mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Roll</th>
+                        <th>Class</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Blood Group</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $query = "SELECT * FROM students";
+                    $students = mysqli_query($connections, $query);
+                    $serialNumber = 1;
 
+                    while ($row = mysqli_fetch_assoc($students)) {
 
-                while ($row = mysqli_fetch_assoc($students)) {
+                        $id = $row["id"];
+                        $name = $row["name"];
+                        $roll = $row["roll"];
+                        $class = $row["class"];
+                        $address = $row["address"];
+                        $phone = $row["phone"];
+                        $email = $row["email"];
+                        $bloodGroup = $row["blood"];
 
-                $id = $row["id"];
-                $name = $row["name"];
-                $roll = $row["roll"];
-                $class = $row["class"];
-                $address = $row["address"];
-                $phone = $row["phone"];
-                $email = $row["email"];
-                $bloodGroup = $row["blood"];
-                
-               
-                    echo '<tr >
-                    <th scope="row">'.$serialNumber.'</th>
-                    <td>'.$name.'</td>
-                    <td>'.$roll.'</td>
-                    <td>'.$class.'</td>
-                    <td>'.$address.'</td>
-                    <td>'.$phone.'</td>
-                    <td>'.$email.'</td>
-                    <td>'.$bloodGroup.'</td>
-                    <td>
-                        <a href="edit.php?id='.$id.'" class="btn btn-info">Edit</a>
-                        <a href="delete.php?id='.$id.'" class="btn btn-danger">Delete</a>
-                    </td>
-                </tr>';
-                $serialNumber++;
+                        echo '<tr>
+                        <th scope="row">' . $serialNumber . '</th>
+                        <td>' . $name . '</td>
+                        <td>' . $roll . '</td>
+                        <td>' . $class . '</td>
+                        <td>' . $address . '</td>
+                        <td>' . $phone . '</td>
+                        <td>' . $email . '</td>
+                        <td>' . $bloodGroup . '</td>
+                        <td>
+                            <a href="edit.php?id=' . $id . '" class="btn btn-info btn-sm">Edit</a>
 
-                }
+                            <button 
+                                class="btn btn-danger btn-sm"
+                                data-bs-toggle="modal"
+                                data-bs-target="#deleteModal"
+                                onclick="setDeleteId(' . $id . ')">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>';
 
-                ?>
-
-
-
-            </tbody>
-        </table>
+                        $serialNumber++;
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 shadow">
 
+                <div class="modal-body text-center p-4">
+                    <div class="mb-3">
+                        <span style="font-size: 60px; color: red;">?</span>
+                    </div>
 
+                    <h5 class="mb-4">Are you sure you want to delete this user?</h5>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
+                    <div class="d-flex justify-content-center gap-3">
+                        <button type="button" class="btn btn-light px-4" data-bs-dismiss="modal">
+                            Cancel
+                        </button>
+
+                        <a href="#" id="confirmDeleteBtn" class="btn btn-danger px-4">
+                            Delete
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function setDeleteId(id) {
+            document.getElementById("confirmDeleteBtn").href = "delete.php?id=" + id;
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
